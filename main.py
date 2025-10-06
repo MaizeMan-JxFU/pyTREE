@@ -8,15 +8,13 @@ class TREE:
         self._getchild(Treedic)
         plt.savefig('test.png')
         pass
-    def _getchild(self,dic:dict,loc:tuple=(-1,0),layer:int=1):
+    def _getchild(self,dic:dict,loc:tuple=(0,0),layer:int=1):
         x,y = loc
         for ind,root in enumerate(dic.keys()):
             print(root,layer)
             child = dic[root]
-            x = loc[0]+(-1)**(ind)/layer
-            y = loc[1]+child[0]
+            x,y = (loc[0]+(-1)**(ind)/layer,loc[1]+child[0]) if layer > 1 else (x,y)
             print([loc[0],x],[loc[1],y])
-            # self.ax.text(*loc,root,ha='center')
             self.ax.text(x,y,root,ha='center',va='center')
             self.ax.scatter(x,y,color='red')
             self.ax.plot([loc[0],x],[loc[1],y],color='black')
