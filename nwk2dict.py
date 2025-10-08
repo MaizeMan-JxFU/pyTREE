@@ -1,7 +1,6 @@
 import re
 import time
-with open('tree.mini.nwk') as f:
-    nwk = f.readline().strip()
+
 class NWKKIT:
     def __init__(self,nwk:str):
         self.nwk = nwk
@@ -22,9 +21,17 @@ class NWKKIT:
 
 class NWK:
     def __init__(self,nwk:str):
+        nwk = nwk.replace(' ','').replace(';','').strip()
+        self.pattern = r'\([^()]*\)' # 匹配最内侧子树
+        nwk = self._get_innerNode(nwk)
         print(nwk)
         pass
-
+    def _get_innerNode(self,nwk):
+        re.search(self.pattern,nwk).group()
+        return nwk
+    
+with open('tree.test.nwk') as f:
+    nwk = f.readline().strip()
 t = time.time()
-NWKKIT(nwk)
+NWK(nwk)
 print(round(time.time()-t,4),'Secs')
