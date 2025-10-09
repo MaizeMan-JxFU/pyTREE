@@ -84,7 +84,7 @@ class NWK:
         return new_nwk
 
 if __name__ == '__main__':
-    with open('tree.test.nwk') as f:
+    with open('tree.huge.nwk') as f:
         nwk = f.readline().strip()
     t = time.time()
     model = NWK(nwk)
