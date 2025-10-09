@@ -18,7 +18,7 @@ G = nx.Graph()
 G.add_weighted_edges_from(weighted_edges)
 pos = trans_pos(hierarchy_pos(G,'root',),G,True)
 fig, subax1 = plt.subplots(figsize = (8, 8))
-group = pd.read_csv('tag_1.csv',sep=r'\t',index_col=1,engine='python').fillna('others')
+# group = pd.read_csv('tag_1.csv',sep=r'\t',index_col=1,engine='python').fillna('others')
 if False:
     texts = []
     for i,loc in pos.items():
@@ -36,12 +36,12 @@ for i, edge in enumerate(G.edges()):
     u, v = edge
     u = model.mapping[int(u)] if u!='root' else 'root'
     v = model.mapping[int(v)] if v!='root' else 'root'
-    if u in group.index:
-        edge_colors[i] = color_dict[group.loc[u]['group']]
-        arrowsize[i] = size_dict[group.loc[u]['group']]
-    elif v in group.index:
-        edge_colors[i] = color_dict[group.loc[v]['group']]
-        arrowsize[i] = size_dict[group.loc[v]['group']]
+    # if u in group.index:
+    #     edge_colors[i] = color_dict[group.loc[u]['group']]
+    #     arrowsize[i] = size_dict[group.loc[u]['group']]
+    # elif v in group.index:
+    #     edge_colors[i] = color_dict[group.loc[v]['group']]
+    #     arrowsize[i] = size_dict[group.loc[v]['group']]
 nx.draw_networkx_nodes(G, pos, node_shape=['s'])
 # nx.draw_networkx_labels(G, pos,)
 nx.draw_networkx_edges(G, pos,alpha=1,edge_color=edge_colors,width=arrowsize)
