@@ -23,13 +23,10 @@ class NWK:
     def __init__(self,nwk:str):
         nwk = nwk.replace(' ','').replace(';','').strip()
         nwk = self._recode(nwk)
-        print(nwk)
         self.pattern = r'\([^()]*\)' # 匹配最内侧子树
         self.tree = {}
         while '(' in nwk:
             nwk = self._get_innerNode(nwk)
-        print(len(self.tree))
-        print(self.tree)
         pass
     def _get_innerNode(self,nwk:str):
         innerNode = re.search(self.pattern,nwk).group()
@@ -83,9 +80,10 @@ class NWK:
         self.mapping = mapping
         return new_nwk
 
-
-with open('tree.test.nwk') as f:
-    nwk = f.readline().strip()
-t = time.time()
-NWK(nwk)
-print(round(time.time()-t,4),'Secs')
+if __name__ == '__main__':
+    with open('tree.mini.nwk') as f:
+        nwk = f.readline().strip()
+    t = time.time()
+    model = NWK(nwk)
+    print(model.tree)
+    print(round(time.time()-t,4),'Secs')
