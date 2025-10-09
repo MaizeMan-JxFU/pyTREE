@@ -6,8 +6,7 @@ import numpy as np
 from nwk2dict import NWK
 import time
 from hierarchy_pos import hierarchy_pos,trans_pos
-# with open(r"tree.huge.nwk") as f: # "C:\Users\82788\Desktop\mergeGainAMP.B73v4.ftree.nwk" tree.huge.nwk
-with open(r"C:\Users\82788\Desktop\mergeGainAMP.B73v4.ftree.nwk") as f: # "C:\Users\82788\Desktop\mergeGainAMP.B73v4.ftree.nwk" tree.huge.nwk
+with open(r"tree.huge.nwk") as f: # "C:\Users\82788\Desktop\mergeGainAMP.B73v4.ftree.nwk" tree.huge.nwk
     nwk = f.readline().strip()
 t = time.time()
 model = NWK(nwk)
