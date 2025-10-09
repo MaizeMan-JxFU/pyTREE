@@ -34,7 +34,7 @@ class NWK:
         Node1 = re.search(rf'\)(.*?)\)',nwk_after)
         Node2 = re.search(rf'\)(.*?)\,',nwk_after)
         Node = None
-        parentNode = None
+        parentNode = 'root'
         if Node1 != None:
             Node1 = Node1.group()[1:-1]
             if Node1.count(':')==1:
@@ -55,10 +55,13 @@ class NWK:
                 parentNode2 = parentNode2.group()[1:-1]
                 if parentNode2.count(':')==1:
                     parentNode = parentNode2
+            innerNode_dict = innerNode[1:-1].split(',')
+            innerNode_dict = dict(zip([i.split(':')[0] for i in innerNode_dict],[i.split(':')[1] for i in innerNode_dict]))
             self.tree[Node.split(':')[0]] = [Node.split(':')[1],innerNode[1:-1].split(','),parentNode]
         else:
-            parentNode = None
-            self.tree['root'] = [None,innerNode[1:-1].split(','),None]
+            innerNode_dict = innerNode[1:-1].split(',')
+            innerNode_dict = dict(zip([i.split(':')[0] for i in innerNode_dict],[i.split(':')[1] for i in innerNode_dict]))
+            self.tree['root'] = [None,innerNode[1:-1].split(','),parentNode]
         nwk = nwk.replace(innerNode,'')
         return nwk
     def _recode(self, nwk):
@@ -81,7 +84,7 @@ class NWK:
         return new_nwk
 
 if __name__ == '__main__':
-    with open('tree.mini.nwk') as f:
+    with open('tree.test.nwk') as f:
         nwk = f.readline().strip()
     t = time.time()
     model = NWK(nwk)

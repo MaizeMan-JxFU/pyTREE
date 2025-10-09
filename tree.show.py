@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-from collections import deque
 
-def visualize_tree(tree_data,mapping:dict=None):
+def visualize_tree(tree_data,):
     """
     可视化树结构
     
@@ -77,7 +76,7 @@ def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5)
     return pos
 
 def _hierarchy_pos(G, root, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5, 
-                  pos=None, parent=None, parsed=[]):
+                  pos=None, parsed=[]):
     """
     递归计算层次布局的辅助函数
     """
@@ -101,12 +100,12 @@ def _hierarchy_pos(G, root, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5,
         nextx += xwidth
         pos = _hierarchy_pos(G, child, width=xwidth, vert_gap=vert_gap, 
                             vert_loc=vert_loc-vert_gap, xcenter=nextx,
-                            pos=pos, parent=root, parsed=parsed)
+                            pos=pos,  parsed=parsed)
     return pos
 
 from nwk2dict import NWK
 import time
-with open('tree.huge.nwk') as f:
+with open('tree.mini.nwk') as f:
     nwk = f.readline().strip()
 t = time.time()
 model = NWK(nwk)
